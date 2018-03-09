@@ -1,0 +1,9 @@
+
+
+
+for i in  `find RPMS | egrep -v ".src|log$"` ; do 
+   [ -f "$i" ] && sudo cp $i /srv/holding/centos-7/holding/64/ 
+done 
+sudo rm -f /srv/holding/centos-7/holding/64/perl-CPAN-* 
+sudo createrepo /srv/holding/centos-7/holding/64/
+

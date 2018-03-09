@@ -1,0 +1,14 @@
+#!/bin/bash
+
+[ -n "$1" ] && cpanspec --old $1 && exit
+
+for i in `cat jmx4perl.dep2.list` ; do
+  echo $i
+  if  ! x=`find SPECS | grep $i ` ; then
+    echo `ls SPECS/perl-$i*`
+    cpanspec --old $i
+    mv -u  perl-$i*.spec  ./SPECS
+    mv *.gz ./SOURCES
+  fi
+done
+

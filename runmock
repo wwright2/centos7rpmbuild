@@ -1,0 +1,21 @@
+
+trap ctrl_c INT
+
+function ctrl_c() {
+        echo "** Trapped CTRL-C"
+        exit 
+        
+}
+
+
+if [ -n "$1" ] ; then
+     [ -f "$1" ] && mock -r epel-7-x86_64 --enablerepo=holding -N --resultdir=./RPMS  rebuild $1
+     exit 0
+fi
+
+
+for i in `find SRPMS` ; do 
+  if [ -f $i ] ; then
+     mock -r epel-7-x86_64 --update --enablerepo=holding -N --resultdir=./RPMS  rebuild $i
+  fi
+done 

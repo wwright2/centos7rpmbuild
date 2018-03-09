@@ -1,0 +1,8 @@
+
+[ -n "$1" ] && rpmbuild -bs $1 && exit
+
+for i in `find SPECS` ; do 
+    if [ -f $i ] ; then
+       rpmbuild -bs $i
+    fi
+done
